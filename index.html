@@ -338,23 +338,26 @@
           Questions, thoughts, or just want to say hello?
         </h3>
 
-        <form action="#" class="contact-form">
+        <form action="#" class="contact-form" id="contact-form">
           <div class="form-field">
             <input type="text" 
+            name="name"
             placeholder="Enter your name" 
             required/>
           </div>
 
           <div class="form-field">
             <input type="email"
+             name="email"
              placeholder="Enter your email address"
              required />
           </div>
 
           <div class="form-field">
             <input type="text" 
-            placeholder="Enter your subject"
-            required />
+            name="purpose"
+            placeholder="Enter your purpose"
+             />
           </div>
 
           <div class="form-field">
@@ -363,6 +366,7 @@
               id="my-textarea"
               cols="30"
               rows="10"
+              name="message"
               placeholder="Enter your message"
               required
             ></textarea>
