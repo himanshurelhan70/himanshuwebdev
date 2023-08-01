@@ -3,35 +3,42 @@ const mobileNav = document.querySelector('.mobile-nav');
 const overlay = document.querySelector('.overlay');
 const contactForm = document.querySelector('#contact-form');
 
-// handling form
+// sending form data to backend
 const form = document.querySelector("#contact-form");
 form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+  try{
+    e.preventDefault();
 
-  const name = document.querySelector("input[name='name']").value;
-  const email = document.querySelector("input[name='email']").value;
-  const phone = document.querySelector("input[name='phone']").value;
-  const message = document.querySelector("#messageArea").value;
+    const name = document.querySelector("input[name='name']").value;
+    const email = document.querySelector("input[name='email']").value;
+    const phone = document.querySelector("input[name='phone']").value;
+    const message = document.querySelector("#messageArea").value;
+  
+    const newData = {
+      name: name,
+      email: email,
+      phone: phone,
+      message: message
+    }
+  
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify(newData),
+    }
+  
+    const response = await fetch("http://localhost:9000/api/v1/createUser", options);
+    const res = await response.json();
+    console.log("data", res.status);
 
-  const newData = {
-    name: name,
-    email: email,
-    phone: phone,
-    message: message
+    alert("Form is submitted successfully");
   }
-
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type" : "application/json"
-    },
-    body: JSON.stringify(newData),
+  catch(err){
+    console.log("error occurred while submitting the form")
   }
-
-  const response = await fetch("http://localhost:9000/api/v1/createUser", options);
-  const res = response.json();
-  console.log("data", res.data);
-})
+});
 
 hamburger.addEventListener('click', () => {
   mobileNav.classList.toggle('active');
