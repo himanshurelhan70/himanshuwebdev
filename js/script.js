@@ -9,24 +9,28 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const name = document.querySelector("input[name='name']").value;
-  const email = document.querySelector("input[name='email']").email;
-  const purpose = document.querySelector("input[name='purpose']").purpose;
-  const message = document.querySelector("input[name='message']").message;
+  const email = document.querySelector("input[name='email']").value;
+  const phone = document.querySelector("input[name='phone']").value;
+  const message = document.querySelector("#messageArea").value;
 
   const newData = {
     name: name,
     email: email,
-    purpose: purpose,
+    phone: phone,
     message: message
   }
 
   const options = {
     method: "POST",
-    data: JSON.stringify(newData)
+    headers: {
+      "Content-Type" : "application/json"
+    },
+    body: JSON.stringify(newData),
   }
-  const response = await fetch("http://localhost:9000/api/v1/createUser", options)
-  const data = response.json();
-  console.log("data", data);
+
+  const response = await fetch("http://localhost:9000/api/v1/createUser", options);
+  const res = response.json();
+  console.log("data", res.data);
 })
 
 hamburger.addEventListener('click', () => {

@@ -10,12 +10,13 @@ exports.welcome = (req, res) => {
 
 exports.createUser = async (req, res) => {
    try{
-    const { name, email, purpose, message } = req.body;
+    const { name, email, phone, message } = req.body;
+    // console.log(name, email, phone, message);
 
     const createdUser = await User.create({
         name,
         email,
-        purpose,
+        phone,
         message
     });
 

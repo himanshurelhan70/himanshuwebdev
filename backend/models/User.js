@@ -12,12 +12,11 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    purpose: {
+    phone: {
         type: String,
     },
     message: {
         type: String,
-        required: true
     }
 });
 
@@ -31,17 +30,35 @@ userSchema.post("save", async function(doc) {
         const transporter = nodemailer.connect();
 
         //send mail 
-        let info = await transporter.sendMail({
-            from: `himanshurelhan70@gmail.com`,
+        let mailThem = await transporter.sendMail({
+            from: 'himanshurelhan70@gmail.com',
             to: doc.email,
             subject: "Thanks for visiting my portfolio website",
             html: `<h2>Hello ${doc.name} </h2> 
             <p>Your record has been successfully registered with me</p>
             <p>I will contact you as soon as possible</p>
+            <br/>
+            <br/>
+            <p>Thanks and Regards</p>
+            <p>Himanshu</p>
             `,
         });
 
-        console.log("INFO of mail", info);
+        console.log("INFO of mail sent to user", mailThem);
+
+        let mailMe = await transporter.sendMail({
+            from: 'himanshurelhan70@gmail.com',
+            to: 'himanshurelhan70@gmail.com',
+            subject: "A user filled the contact form",
+            html: `
+                <p>Name - ${doc.name} </p>
+                <p>Email - ${doc.email} </p>
+                <p>Phone - ${doc.phone} </p>
+                <p>Message - ${doc.message} </p>
+            `,
+        });
+
+        console.log("INFO of mail to your another mail", mailMe);
 
 
     }
