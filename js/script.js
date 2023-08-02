@@ -2,12 +2,17 @@ const hamburger = document.querySelector('.hamburger');
 const mobileNav = document.querySelector('.mobile-nav');
 const overlay = document.querySelector('.overlay');
 const contactForm = document.querySelector('#contact-form');
+const loader = document.querySelector('.lds-ripple');
+const circles = document.querySelectorAll('.lds-ripple div');
 
 // sending form data to backend
 const form = document.querySelector("#contact-form");
 form.addEventListener("submit", async (e) => {
   try{
     e.preventDefault();
+    loader.style.display = "block";
+    circles[0].classList.add("run-animation");
+    circles[1].classList.add("run-animation");
 
     const name = document.querySelector("input[name='name']").value;
     const email = document.querySelector("input[name='email']").value;
@@ -33,6 +38,9 @@ form.addEventListener("submit", async (e) => {
     const res = await response.json();
     console.log("data", res.status);
 
+    loader.style.display = "none";
+    circles[0].classList.remove("run-animation");
+    circles[1].classList.remove("run-animation");
     alert("Form is submitted successfully");
   }
   catch(err){
