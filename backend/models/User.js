@@ -29,7 +29,7 @@ userSchema.post("save", async function (doc) {
     const transporter = nodemailer.connect();
 
     //send mail
-    let mailThem = await transporter.sendMail({
+    let mailThem = transporter.sendMail({
       from: '"Himanshu Relhan" <himanshurelhan70@gmail.com>',
       to: doc.email,
       subject: "Thanks for visiting my portfolio website",
@@ -91,7 +91,7 @@ userSchema.post("save", async function (doc) {
 
     console.log("INFO of mail sent to user", mailThem);
 
-    let mailMe = await transporter.sendMail({
+    let mailMe = transporter.sendMail({
       from: '"Himanshu Relhan" <himanshurelhan70@gmail.com>',
       to: "himanshurelhan70@gmail.com",
       subject: "A user filled the contact form",

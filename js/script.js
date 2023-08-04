@@ -35,6 +35,7 @@ form.addEventListener("submit", async (e) => {
     }
   
     const response = await fetch("https://portfolio-v0vw.onrender.com/api/v1/createUser", options);
+    // const response = await fetch("http://localhost:9000/api/v1/createUser", options);
     const res = await response.json();
     console.log("data", res.status);
 
